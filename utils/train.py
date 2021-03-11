@@ -9,7 +9,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 
 from utils.function import *
-from model.resnet import resnet
+from model.SE import SEresnet
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
@@ -59,7 +59,7 @@ def main(args):
         # Device Config
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-        model = resnet()
+        model = SEresnet()
         model = model.to(device)
 
         criterion = nn.CrossEntropyLoss().to(device)
