@@ -17,16 +17,19 @@ class SELayer(nn.Module):
         )
     def forward(self, x):
 
-        out = self.avg_pool(x).view(x.size(0),x.size(1))
-        out = self.fc(out).view(x.size(0), x.size(1), 1,1)
-        return x * out.expand_as(x)
+        out = self.avg_pool(x)
+        out = out.view(out.size(0), out.size(1))
+        out = self.fc(out)
+        out = out.view(out.size(0), out.size(1), 1,1)
+        out = out.expand_as(x)
+        return x * out
 
 class CifarSEResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride = 1, reduction = 16):
         super(CifarSEResidualBlock, self).__init__()
         self.conv1 = conv3x3(in_channels, out_channels, stride)
         self.bn1 = nn.BatchNorm2d(out_channels)
-        self.relu = nn.BatchNorm2d(out_channels)
+        self.relu = nn.ReLU(inplace = True)
         self.conv2 = conv3x3(out_channels, out_channels)
         self.bn2 = nn.BatchNorm2d(out_channels)
 
@@ -34,7 +37,7 @@ class CifarSEResidualBlock(nn.Module):
 
         if in_channels != out_channels or stride != 1 :
             self.down_sample = nn.Sequential(
-                                                nn.Conv2d(in_channels, out_channels, kernel_size = 2, stride = stride, bias = False),
+                                                nn.Conv2d(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
                                                 nn.BatchNorm2d(out_channels))
         else :  self.down_sample = None
 

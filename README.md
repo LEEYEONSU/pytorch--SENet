@@ -32,12 +32,11 @@
 
   - Option
 
-    - Cutout **(in progress....)** - Masking part zeo 
+    - Cutout - Masking part zero 
     - <img src="/Users/yeonsulee/Library/Application Support/typora-user-images/image-20210312142412454.png" alt="image-20210312142412454" style="zoom:33%;" />
 
-    
 
-#####Parameters
+##### Parameters
 
 - Weight_initialization - kaiming_normal 
 - Optimizer
