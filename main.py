@@ -30,6 +30,11 @@ parser.add_argument('--Epoch', default = 80, type=int,  help = ' Epoch ')
 parser.add_argument('--batch_size', default = 128, type=int,  help = 'TRAIN batch size ')
 parser.add_argument('--test_batch_size', default = 100, type=int,  help = 'TEST batch size')
 
+#Data augmentation 
+parser.add_argument('--cutout', action='store_true', default=True, help='apply cutout')
+parser.add_argument('--n_masks', type=int, default=1, help='number of masks to cut out from image')
+parser.add_argument('--length', type=int, default=4,  help='length of the masks')
+
 args = parser.parse_args()
 #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .#
 

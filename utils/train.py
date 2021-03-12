@@ -9,6 +9,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 
 from utils.function import *
+from utils.cutout import Cutout
 from model.SE import SEresnet
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
@@ -28,6 +29,9 @@ def main(args):
                 transforms.ToTensor(), 
                 transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
         ])
+
+        if args.cutout : 
+                TRAIN_transform.transforms.append(Cutout(n_masks = args.n_masks, length = args.length))
 
         VAL_transform = transforms.Compose([
                 transforms.ToTensor(),
