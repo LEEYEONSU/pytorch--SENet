@@ -10,7 +10,6 @@ import torchvision.transforms as transforms
 
 from utils.train import *
 from utils.function import *
-from model.resnet import resnet
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
