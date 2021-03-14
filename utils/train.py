@@ -68,7 +68,7 @@ def main(args):
 
         criterion = nn.CrossEntropyLoss().to(device)
         optimizer = optim.SGD(model.parameters() , lr = args.lr , weight_decay = args.weight_decay, momentum = args.momentum)
-        lr_schedule = lr_scheduler.MultiStepLR(optimizer, milestones = [30,80], gamma = 0.1)
+        lr_schedule = lr_scheduler.MultiStepLR(optimizer, milestones = [250,375], gamma = 0.1)
 
         if args.evaluate :
                 model.load_state_dict(torch.load('./save_model/model.th'))  

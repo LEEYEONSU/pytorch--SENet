@@ -25,7 +25,7 @@ class SELayer(nn.Module):
         return x * out
 
 class CifarSEResidualBlock(nn.Module):
-    def __init__(self, in_channels, out_channels, stride = 1, reduction = 16):
+    def __init__(self, in_channels, out_channels, stride = 1, reduction = 8):
         super(CifarSEResidualBlock, self).__init__()
         self.conv1 = conv3x3(in_channels, out_channels, stride)
         self.bn1 = nn.BatchNorm2d(out_channels)

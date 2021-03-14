@@ -33,7 +33,7 @@ parser.add_argument('--test_batch_size', default = 100, type=int,  help = 'TEST 
 #Data augmentation 
 parser.add_argument('--cutout', action='store_true', default=True, help='apply cutout')
 parser.add_argument('--n_masks', type=int, default=1, help='number of masks to cut out from image')
-parser.add_argument('--length', type=int, default=4,  help='length of the masks')
+parser.add_argument('--length', type=int, default=16,  help='length of the masks')
 
 args = parser.parse_args()
 #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .#
