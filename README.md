@@ -1,4 +1,4 @@
-###Squeeze - and - Excitation Networks implementation (pytorch)
+### Squeeze - and - Excitation Networks implementation (pytorch)
 
 - For training
 
@@ -26,7 +26,7 @@
   - Option
     - Cutout  - Masking part to zero
 
-#####Parameters
+##### Parameters
 
 - Weight_initialization - kaiming_normal
 - Optimizer
