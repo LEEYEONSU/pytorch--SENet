@@ -15,3 +15,28 @@
 | top - 1 error |              6.27              |           6.15           |                      4.76                       |
 
 ---
+
+##### Preprocessing
+
+- **Data augmentation**
+  - 4pixels padded
+  - Randomly 32 x 32 crop
+  - Horizontal Flip
+  - Normalization with mean and standard deviation
+  - Option
+    - Cutout  - Masking part to zero
+
+#####Parameters
+
+- Weight_initialization - kaiming_normal
+- Optimizer
+  - SGD
+    - Learning_rate : 0.1
+    - Milestones [250, 375]
+    - gamma : 0.1
+  - Weight_decay : 0.4
+  - momentum : 0.9
+
+##### Others
+
+- Shake-Shake regularization (in progress...)
