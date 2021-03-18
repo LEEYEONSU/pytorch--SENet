@@ -39,4 +39,6 @@
 
 ##### Others
 
+- group normalization (in progress...)
+- weight standardization (in progress...)
 - Shake-Shake regularization (in progress...)
