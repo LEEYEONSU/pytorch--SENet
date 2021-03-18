@@ -5,8 +5,9 @@ import torch.nn as nn
 # pytorch implementation for group normalization
 class GroupNorm2d(nn.Module):
 
-    def __init__(self, num_channels, num_groups = 32, eps = 1e-5):
+    def __init__(self, num_channels, num_groups = 8, eps = 1e-5):
         super(GroupNorm2d, self).__init__()
+        self.num_channels = num_channels
         self.num_groups = num_groups
         self.gamma = nn.Parameter(torch.ones(num_channels, 1, 1))
         self.beta = nn.Parameter(torch.zeros(num_channels, 1, 1))

@@ -25,6 +25,7 @@ parser.add_argument('--evaluate', default = 0, type = int,help='evaluate model o
 parser.add_argument('--lr', default=0.1, help = 'learning rate')
 parser.add_argument('--weight_decay', default = 1e-4, help = 'weight_decay')
 parser.add_argument('--momentum', default = 0.9, help = 'momentum')
+parser.add_argument('--normalize', default = 'batchnorm', help = 'choose batchnorm or groupnorm')
 
 parser.add_argument('--Epoch', default = 80, type=int,  help = ' Epoch ')
 parser.add_argument('--batch_size', default = 128, type=int,  help = 'TRAIN batch size ')

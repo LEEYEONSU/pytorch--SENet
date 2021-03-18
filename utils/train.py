@@ -11,6 +11,7 @@ import torchvision.transforms as transforms
 from utils.function import *
 from utils.cutout import Cutout
 from model.SE import SEresnet
+from model.SE_groupnorm import SEresnet_gn
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
@@ -63,7 +64,11 @@ def main(args):
         # Device Config
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-        model = SEresnet()
+        if args.normalize == 'groupnorm':
+                model = SEresnet_gn()
+        else : 
+                 model = SEresnet()
+
         model = model.to(device)
 
         criterion = nn.CrossEntropyLoss().to(device)
