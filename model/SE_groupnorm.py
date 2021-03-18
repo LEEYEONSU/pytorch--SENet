@@ -2,21 +2,22 @@ from torch import nn
 import torch.nn.init as init
 from utils.group_normalization import GroupNorm2d
 
-class conv3x3_WS(nn.Conv2d):
-    def __init__(self, in_channels, out_channels, kernel_size = 3, stride = stride, groups = 1, padding = 1, bias = False, eps = 1e-5) :
-        super(conv3x3_WS, self).__init__()
-        self.in_channels = in_channels
-        self.out_channels = out_channels
-        self.stride = stride
-        self.eps = eps
+# class conv3x3_WS(nn.Conv2d):
+#     def __init__(self, in_channels, out_channels, kernel_size = 3, stride = stride, groups = 1, padding = 1, bias = False, eps = 1e-5) :
+#         super(conv3x3_WS, self).__init__()
+#         self.in_channels = in_channels
+#         self.out_channels = out_channels
+#         self.stride = stride
+#         self.eps = eps
 
-    def foward(self, x):
-        weight = self.weight
-        weight_mean = torch.mean(weight, dim = (1,2,3), keepdim = True)
-        weight_var = torch.var(weight, dim = (1,2,3), keepdim = True)
+#     def foward(self, x):
+#         weight = self.weight
+#         weight_mean = torch.mean(weight, dim = (1,2,3), keepdim = True)
+#         weight_var = torch.var(weight, dim = (1,2,3), keepdim = True)
 
-        weight = (weight - mean) / torch.sqrt(var + self.eps)
+#         weight = (weight - mean) / torch.sqrt(var + self.eps)
 
+#         return F.conv2d(x, weight, )
 
 
 def conv3x3(in_channels, out_channels, stride = 1):

@@ -25,7 +25,7 @@ class GroupNorm2d(nn.Module):
         var = torch.var(x, dim =(2,3,4), keepdim = True)    
 
         # (N, G, C//G, H, W)
-        x = (x - mean) /torch.sqrt( var + self.eps)
+        x = (x - mean) /torch.sqrt( var + self.eps )
         # (N, C, H, W)
         x = x.view(N, C, H, W)
 
