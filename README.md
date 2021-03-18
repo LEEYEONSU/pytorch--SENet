@@ -16,7 +16,7 @@
 
 - Group normalization 
 
-|               | SE + resnset (this code) + groupnorm | SEresnet + cutout + groupnorm (this code) (cut length : 16) |
+|               | SE + resnet (this code) + groupnorm | SEresnet + cutout + groupnorm (this code) (cut length : 16) |
 | ------------- | :----------------------: | :---------------------------------------------: |
 | top - 1 error |                     |                                    |
 
