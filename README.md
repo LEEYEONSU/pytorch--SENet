@@ -10,9 +10,15 @@
   
 - **Result** 
 
-|               | resnet(from yeonsu repository) | SE + resnset (this code) | SEresnet + cutout (this code) (cut length : 16) |
+|               | resnet(from yeonsu repository) | SE + resnset (this code) + batchnorm | SEresnet + cutout + batch norm (this code) (cut length : 16) |
 | ------------- | :----------------------------: | :----------------------: | :---------------------------------------------: |
 | top - 1 error |              6.27              |           6.15           |                      4.76                       |
+
+- Group normalization 
+
+|               | SE + resnet (this code) + groupnorm | SEresnet + cutout + groupnorm (this code) (cut length : 16) |
+| ------------- | :----------------------: | :---------------------------------------------: |
+| top - 1 error |                     |                                    |
 
 ---
 
@@ -39,6 +45,6 @@
 
 ##### Others
 
-- group normalization (in progress...)
+- group normalization 
 - weight standardization (in progress...)
 - Shake-Shake regularization (in progress...)
