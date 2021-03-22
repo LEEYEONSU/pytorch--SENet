@@ -2,26 +2,24 @@ from torch import nn
 import torch.nn.init as init
 from utils.group_normalization import GroupNorm2d
 
-# class conv3x3_WS(nn.Conv2d):
-#     def __init__(self, in_channels, out_channels, kernel_size = 3, stride = stride, groups = 1, padding = 1, bias = False, eps = 1e-5) :
-#         super(conv3x3_WS, self).__init__()
-#         self.in_channels = in_channels
-#         self.out_channels = out_channels
-#         self.stride = stride
-#         self.eps = eps
+# Weight_standardization
+class conv3x3_WS(nn.Conv2d):
+    def __init__(self, in_channels, out_channels, kernel_size = 3, stride = 1, groups = 1, padding = 1, bias = False, eps = 1e-5) :
+        super(conv3x3_WS, self).__init__()
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.stride = stride
+        self.padding = padding 
+        self.eps = eps
 
-#     def foward(self, x):
-#         weight = self.weight
-#         weight_mean = torch.mean(weight, dim = (1,2,3), keepdim = True)
-#         weight_var = torch.var(weight, dim = (1,2,3), keepdim = True)
+    def foward(self, x):
+        weight = self.weight
+        weight_mean = torch.mean(weight, dim = (1,2,3), keepdim = True)
+        weight_var = torch.var(weight, dim = (1,2,3), keepdim = True)
 
-#         weight = (weight - mean) / torch.sqrt(var + self.eps)
+        weight = (weight - mean) / torch.sqrt(var + self.eps)
 
-#         return F.conv2d(x, weight, )
-
-
-def conv3x3(in_channels, out_channels, stride = 1):
-        return nn.Conv2d(in_channels, out_channels, kernel_size = 3, stride = stride, padding = 1, bias = False)
+        return F.conv2d(x, weight, stride = self.stride, padding = self.padding )
 
 class SELayer(nn.Module):
     def __init__(self, channel, reduction = 16):
@@ -46,21 +44,18 @@ class SELayer(nn.Module):
 class CifarSEResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride = 1, reduction = 16):
         super(CifarSEResidualBlock, self).__init__()
-        self.conv1 = conv3x3(in_channels, out_channels, stride)
-        # self.gn1 = GroupNorm2d(num_channels = out_channels)
+        self.conv1 = conv3x3_WS(in_channels, out_channels, stride = stride)
         self.gn1 = nn.GroupNorm(num_groups = 8, num_channels = out_channels)
         self.relu = nn.ReLU(inplace = True)
-        self.conv2 = conv3x3(out_channels, out_channels)
-        # self.gn2 = GroupNorm2d(num_channels = out_channels)
+        self.conv2 = conv3x3_WS(out_channels, out_channels)
         self.gn2 = nn.GroupNorm(num_groups = 8, num_channels = out_channels)
 
         self.se = SELayer(out_channels, reduction)
 
         if in_channels != out_channels or stride != 1 :
             self.down_sample = nn.Sequential(
-                                                nn.Conv2d(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
+                                                conv3x3_WS(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
                                                 nn.GroupNorm(num_groups = 8, num_channels = out_channels))
-                                                # GroupNorm2d(num_channels= out_channels))
         else :  self.down_sample = None
 
         self.stride = stride
@@ -85,8 +80,7 @@ class CifarSEResidualBlock(nn.Module):
 class CifarSEResNet(nn.Module):        
     def __init__ (self, n_layers, block, num_classes = 10, reduction = 16):
             super(CifarSEResNet, self).__init__()
-            self.conv1 = conv3x3(in_channels = 3, out_channels = 16, stride = 1)
-            # self.gn1 = GroupNorm2d(num_channels = 16)
+            self.conv1 = conv3x3_WS(in_channels = 3, out_channels = 16, stride = 1)
             self.gn1 = nn.GroupNorm(num_groups = 8, num_channels = 16)
             self.relu = nn.ReLU(inplace = True)
                 
@@ -130,5 +124,5 @@ class CifarSEResNet(nn.Module):
 
         return out
 
-def SEresnet_gn():
+def SEresnet_gn_ws():
     return CifarSEResNet(5, block = CifarSEResidualBlock, reduction = 16)
