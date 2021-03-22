@@ -12,6 +12,7 @@ from utils.function import *
 from utils.cutout import Cutout
 from model.SE import SEresnet
 from model.SE_groupnorm import SEresnet_gn
+from model.SE_groupnorm_weight_stand import SEresnet_gn_ws
 from torch.optim import lr_scheduler
 from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10
@@ -66,6 +67,9 @@ def main(args):
 
         if args.normalize == 'groupnorm':
                 model = SEresnet_gn()
+
+        elif args.normalize == 'groupnorm+ws':
+                model = SEresnet_gn_ws()
         else : 
                  model = SEresnet()
 
