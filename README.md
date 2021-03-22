@@ -22,7 +22,7 @@
 
 |               | SE + resnet (this code) + groupnorm | SEresnet + cutout + groupnorm (this code) (cut length : 16) |
 | ------------- | :----------------------: | :---------------------------------------------: |
-| top - 1 error |                     |                                    |
+| top - 1 error |                     | 7.46 |
 
 ---
 
