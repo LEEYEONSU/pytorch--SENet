@@ -4,22 +4,17 @@ from utils.group_normalization import GroupNorm2d
 
 # Weight_standardization
 class conv3x3_WS(nn.Conv2d):
-    def __init__(self, in_channels, out_channels, kernel_size = 3, stride = 1, groups = 1, padding = 1, bias = False, eps = 1e-5) :
-        super(conv3x3_WS, self).__init__()
-        self.in_channels = in_channels
-        self.out_channels = out_channels
-        self.stride = stride
-        self.padding = padding 
-        self.eps = eps
+    def __init__(self, in_channels, out_channels, kernel_size = 3, stride = 1, padding = 1, dilation = 1, groups = 1, bias = True) :
+        super(conv3x3_WS, self).__init__(in_channels, out_channels, kernel_size, stride, padding, dilation, groups, bias)
 
     def foward(self, x):
         weight = self.weight
         weight_mean = torch.mean(weight, dim = (1,2,3), keepdim = True)
         weight_var = torch.var(weight, dim = (1,2,3), keepdim = True)
 
-        weight = (weight - mean) / torch.sqrt(var + self.eps)
+        weight = (weight - mean) / torch.sqrt(var + 1e-5 )
 
-        return F.conv2d(x, weight, stride = self.stride, padding = self.padding )
+        return F.conv2d(x, weight, self.bias, self.stride, self.padding, self.dilation, self.groups)
 
 class SELayer(nn.Module):
     def __init__(self, channel, reduction = 16):
@@ -54,7 +49,7 @@ class CifarSEResidualBlock(nn.Module):
 
         if in_channels != out_channels or stride != 1 :
             self.down_sample = nn.Sequential(
-                                                conv3x3_WS(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
+                                                nn.Conv2d(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
                                                 nn.GroupNorm(num_groups = 8, num_channels = out_channels))
         else :  self.down_sample = None
 
