@@ -1,3 +1,5 @@
+
+
 ### Squeeze - and - Excitation Networks implementation (pytorch)
 
 - For training
@@ -11,8 +13,12 @@
   --cutout True --n_masks 1 --length 16 
   --normalize batchnorm
   ~~~
-  
-- **Result** 
+
+---
+
+##### Result 
+
+- Batch normalization
 
 |               | resnet(from yeonsu repository) | SE + resnset (this code) + batchnorm | SEresnet + cutout + batch norm (this code) (cut length : 16) |
 | ------------- | :----------------------------: | :----------------------: | :---------------------------------------------: |
@@ -23,6 +29,12 @@
 |               | SE + resnet (this code) + groupnorm | SEresnet + cutout + groupnorm (this code) (cut length : 16) |
 | ------------- | :----------------------: | :---------------------------------------------: |
 | top - 1 error | 7.46 | 6.56 |
+
+- Group normalization + weight standardization
+
+|               | SE + resnet (this code) + groupnorm + weight standardization | SEresnet + cutout + groupnorm (this code) (cut length : 16) + weight standardization |
+| ------------- | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| top - 1 error |                                                              |                                                              |
 
 ---
 
@@ -35,6 +47,7 @@
   - Normalization with mean and standard deviation
   - Option
     - Cutout  - Masking part to zero
+    - **Cutmix (...in progress...)**
 
 ##### Parameters
 
@@ -50,5 +63,5 @@
 ##### Others
 
 - group normalization 
-- weight standardization (in progress...)
+- weight standardization
 - Shake-Shake regularization (in progress...)
