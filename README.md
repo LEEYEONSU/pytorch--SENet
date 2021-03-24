@@ -34,7 +34,7 @@
 
 |               | SE + resnet (this code) + groupnorm + weight standardization | SEresnet + cutout + groupnorm (this code) (cut length : 16) + weight standardization |
 | ------------- | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| top - 1 error |                                                              |                                                              |
+| top - 1 error |                             7.08                             |                             6.24                             |
 
 ---
 
