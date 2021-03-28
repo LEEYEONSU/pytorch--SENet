@@ -45,7 +45,7 @@
   - Normalization with mean and standard deviation
   - Option
     - Cutout  - Masking part to zero
-    - **Cutmix (...in progress...)**
+    - **Cutmix (...in progress...)** https://github.com/LEEYEONSU/pytorch--CutMix
 
 ##### Parameters
 
