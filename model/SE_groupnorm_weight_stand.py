@@ -49,7 +49,8 @@ class CifarSEResidualBlock(nn.Module):
 
         if in_channels != out_channels or stride != 1 :
             self.down_sample = nn.Sequential(
-                                                nn.Conv2d(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
+                                                conv3x3_WS(in_channels, out_channels, kernel_size = 3, padding = 1,  stride = stride),
+                                                # nn.Conv2d(in_channels, out_channels, kernel_size = 3, padding = 1, stride = stride, bias = False),
                                                 nn.GroupNorm(num_groups = 8, num_channels = out_channels))
         else :  self.down_sample = None
 
