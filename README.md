@@ -1,5 +1,3 @@
-
-
 ### Squeeze - and - Excitation Networks implementation (pytorch)
 
 - For training
