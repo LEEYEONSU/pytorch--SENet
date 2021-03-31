@@ -18,7 +18,7 @@
 
 - Batch normalization
 
-|               | resnet(from yeonsu repository) | SE + resnset (this code) + batchnorm | SEresnet + cutout + batch norm (this code) (cut length : 16) |
+|               | [resnet](https://github.com/LEEYEONSU/pytorch--Resnet)(from yeonsu repository) | SE + resnset (this code) + batchnorm | SEresnet + cutout + batch norm (this code) (cut length : 16) |
 | ------------- | :----------------------------: | :----------------------: | :---------------------------------------------: |
 | top - 1 error |              6.27              |           6.15           |                      4.76                       |
 
@@ -44,8 +44,8 @@
   - Horizontal Flip
   - Normalization with mean and standard deviation
   - Option
-    - Cutout  - Masking part to zero
-    - **Cutmix (...in progress...)** https://github.com/LEEYEONSU/pytorch--CutMix
+    - [Cutout](https://github.com/LEEYEONSU/pytorch--SENet/blob/main/utils/cutout.py)  - Masking part to zero
+    - **Cutmix**  https://github.com/LEEYEONSU/pytorch--CutMix
 
 ##### Parameters
 
@@ -60,6 +60,6 @@
 
 ##### Others
 
-- group normalization 
-- weight standardization
+- [group normalization](https://github.com/LEEYEONSU/pytorch--SENet/blob/main/utils/group_normalization.py) 
+- [weight standardization](https://github.com/LEEYEONSU/pytorch--SENet/blob/main/model/SE_groupnorm_weight_stand.py)
 - Shake-Shake regularization (in progress...)
